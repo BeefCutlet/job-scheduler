@@ -2,6 +2,7 @@ package site.jobiljeong.scheduler.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import site.jobiljeong.scheduler.entity.custom.UserStatus;
 
 @Entity
 @Builder
@@ -22,4 +23,11 @@ public class Users extends BaseTimeEntity {
     private String nickname;
 
     private String authority;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
+
+    public void changeUserStatus(UserStatus status) {
+        this.status = status;
+    }
 }
