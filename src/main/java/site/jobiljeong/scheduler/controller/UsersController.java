@@ -18,8 +18,6 @@ public class UsersController {
 
     /**
      * 유저 정보 저장 (회원가입)
-     * @param userSaveRequest
-     * @return
      */
     @PostMapping
     public ResponseEntity<?> saveUserInfo(UserSaveRequest userSaveRequest) {
@@ -29,8 +27,6 @@ public class UsersController {
 
     /**
      * 회원 탈퇴
-     * @param session
-     * @return
      */
     @PutMapping("/withdrawal")
     public ResponseEntity<?> updateUserStatus(HttpSession session) {
@@ -41,8 +37,6 @@ public class UsersController {
 
     /**
      * 현재 접속 중인 유저 정보 단건 조회
-     * @param session
-     * @return
      */
     @GetMapping("/info")
     public ResponseEntity<UserInfo> findUserInfo(HttpSession session) {
