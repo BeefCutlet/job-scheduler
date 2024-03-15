@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import site.jobiljeong.scheduler.dto.UserInfo;
 import site.jobiljeong.scheduler.dto.UserSaveRequest;
 import site.jobiljeong.scheduler.entity.custom.UserStatus;
-import site.jobiljeong.scheduler.service.UserService;
+import site.jobiljeong.scheduler.service.users.UserService;
 
 @RestController
 @RequestMapping("/users")

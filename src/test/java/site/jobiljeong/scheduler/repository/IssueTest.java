@@ -1,11 +1,11 @@
 package site.jobiljeong.scheduler.repository;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import site.jobiljeong.scheduler.entity.Company;
 import site.jobiljeong.scheduler.entity.Issue;
+import site.jobiljeong.scheduler.repository.issue.IssueRepository;
 
 import static org.assertj.core.api.Assertions.*;
 

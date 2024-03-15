@@ -1,7 +1,6 @@
 package site.jobiljeong.scheduler.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +11,8 @@ import site.jobiljeong.scheduler.dto.UserInfo;
 import site.jobiljeong.scheduler.dto.UserSaveRequest;
 import site.jobiljeong.scheduler.entity.Users;
 import site.jobiljeong.scheduler.entity.custom.UserStatus;
-import site.jobiljeong.scheduler.repository.UsersRepository;
+import site.jobiljeong.scheduler.repository.users.UsersRepository;
+import site.jobiljeong.scheduler.service.users.UserService;
 
 import java.util.Optional;
 

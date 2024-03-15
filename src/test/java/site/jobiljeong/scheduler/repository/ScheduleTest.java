@@ -6,6 +6,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import site.jobiljeong.scheduler.entity.Company;
 import site.jobiljeong.scheduler.entity.Schedule;
 import site.jobiljeong.scheduler.entity.custom.ScheduleType;
+import site.jobiljeong.scheduler.repository.schedule.ScheduleRepository;
 
 import static org.assertj.core.api.Assertions.*;
 

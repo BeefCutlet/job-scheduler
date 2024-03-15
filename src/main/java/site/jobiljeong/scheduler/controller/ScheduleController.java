@@ -5,11 +5,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import site.jobiljeong.scheduler.dto.ScheduleInfo;
+import site.jobiljeong.scheduler.dto.ScheduleInfoRequest;
 import site.jobiljeong.scheduler.dto.ScheduleSaveRequest;
 import site.jobiljeong.scheduler.dto.ScheduleUpdateRequest;
-import site.jobiljeong.scheduler.service.ScheduleService;
+import site.jobiljeong.scheduler.service.schedule.ScheduleService;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/schedule")
@@ -46,5 +48,13 @@ public class ScheduleController {
     public ResponseEntity<ScheduleInfo> findSchedule(@PathVariable Long scheduleNo) {
         ScheduleInfo scheduleInfo = scheduleService.findSchedule(scheduleNo);
         return ResponseEntity.ok(scheduleInfo);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<ScheduleInfo>> findScheduleList(HttpSession session,
+                                                               ScheduleInfoRequest scheduleInfoRequest) {
+        Long userId = (Long) session.getAttribute("userId");
+        List<ScheduleInfo> scheduleList = scheduleService.findScheduleList(userId, scheduleInfoRequest);
+        return ResponseEntity.ok(scheduleList);
     }
 }
