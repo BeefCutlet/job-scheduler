@@ -1,4 +1,4 @@
-package site.jobiljeong.scheduler.repository;
+package site.jobiljeong.scheduler.repository.users;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import site.jobiljeong.scheduler.entity.Users;
