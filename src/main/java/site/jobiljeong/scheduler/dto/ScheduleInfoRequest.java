@@ -2,11 +2,10 @@ package site.jobiljeong.scheduler.dto;
 
 import lombok.Getter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 public class ScheduleInfoRequest {
 
-    private LocalDateTime scheduleRangeStart;
-    private LocalDateTime scheduleRangeEnd;
+    private LocalDate requestDate;
 }
