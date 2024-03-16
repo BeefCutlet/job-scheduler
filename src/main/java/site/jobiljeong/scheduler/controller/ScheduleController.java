@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import site.jobiljeong.scheduler.dto.ScheduleInfo;
+import site.jobiljeong.scheduler.dto.ScheduleInfoResponse;
 import site.jobiljeong.scheduler.dto.ScheduleInfoRequest;
 import site.jobiljeong.scheduler.dto.ScheduleSaveRequest;
 import site.jobiljeong.scheduler.dto.ScheduleUpdateRequest;
@@ -45,16 +45,21 @@ public class ScheduleController {
      * 일정 정보 단건 조회
      */
     @GetMapping("/{scheduleNo}")
-    public ResponseEntity<ScheduleInfo> findSchedule(@PathVariable Long scheduleNo) {
-        ScheduleInfo scheduleInfo = scheduleService.findSchedule(scheduleNo);
-        return ResponseEntity.ok(scheduleInfo);
+    public ResponseEntity<ScheduleInfoResponse> findSchedule(@PathVariable Long scheduleNo) {
+        ScheduleInfoResponse scheduleInfoResponse = scheduleService.findSchedule(scheduleNo);
+        return ResponseEntity.ok(scheduleInfoResponse);
     }
 
+    /**
+     * 일정 정보 기간별 조회 (월별)
+     * 기간 정보 : requestDate
+     * 기간 포맷 : yyyy-MM-dd
+     */
     @GetMapping("/list")
-    public ResponseEntity<List<ScheduleInfo>> findScheduleList(HttpSession session,
-                                                               ScheduleInfoRequest scheduleInfoRequest) {
+    public ResponseEntity<List<ScheduleInfoResponse>> findScheduleList(HttpSession session,
+                                                                       ScheduleInfoRequest scheduleInfoRequest) {
         Long userId = (Long) session.getAttribute("userId");
-        List<ScheduleInfo> scheduleList = scheduleService.findScheduleList(userId, scheduleInfoRequest);
+        List<ScheduleInfoResponse> scheduleList = scheduleService.findScheduleList(userId, scheduleInfoRequest);
         return ResponseEntity.ok(scheduleList);
     }
 }
