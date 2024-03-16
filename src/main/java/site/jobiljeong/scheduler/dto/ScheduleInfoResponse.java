@@ -1,13 +1,17 @@
 package site.jobiljeong.scheduler.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import site.jobiljeong.scheduler.entity.Schedule;
 import site.jobiljeong.scheduler.entity.custom.ScheduleType;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class ScheduleInfo {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ScheduleInfoResponse {
 
     private ScheduleType scheduleType;
     private LocalDateTime scheduleDate;
@@ -16,7 +20,7 @@ public class ScheduleInfo {
     private String scheduleGroup;
     private String companyName;
 
-    public ScheduleInfo createScheduleInfo(Schedule schedule) {
+    public ScheduleInfoResponse createScheduleInfo(Schedule schedule) {
         this.scheduleType = schedule.getScheduleType();
         this.scheduleDate = schedule.getScheduleDate();
         this.memo = schedule.getMemo();
