@@ -1,11 +1,11 @@
 package site.jobiljeong.scheduler.repository.schedule;
 
-import site.jobiljeong.scheduler.dto.ScheduleInfo;
+import site.jobiljeong.scheduler.dto.ScheduleInfoResponse;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ScheduleQueryRepository {
 
-    List<ScheduleInfo> findScheduleList(Long userId, LocalDateTime startDate, LocalDateTime endDate);
+    List<ScheduleInfoResponse> findScheduleList(Long userId, LocalDate currentTime);
 }
