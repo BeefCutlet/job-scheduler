@@ -6,7 +6,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-import site.jobiljeong.scheduler.dto.ScheduleInfoResponse;
+import site.jobiljeong.scheduler.dto.schedule.ScheduleInfoResponse;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

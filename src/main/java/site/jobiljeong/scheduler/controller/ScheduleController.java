@@ -4,10 +4,10 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import site.jobiljeong.scheduler.dto.ScheduleInfoResponse;
-import site.jobiljeong.scheduler.dto.ScheduleInfoRequest;
-import site.jobiljeong.scheduler.dto.ScheduleSaveRequest;
-import site.jobiljeong.scheduler.dto.ScheduleUpdateRequest;
+import site.jobiljeong.scheduler.dto.schedule.ScheduleInfoResponse;
+import site.jobiljeong.scheduler.dto.schedule.ScheduleInfoRequest;
+import site.jobiljeong.scheduler.dto.schedule.ScheduleSaveRequest;
+import site.jobiljeong.scheduler.dto.schedule.ScheduleUpdateRequest;
 import site.jobiljeong.scheduler.service.schedule.ScheduleService;
 
 import java.net.URI;

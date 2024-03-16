@@ -2,7 +2,7 @@ package site.jobiljeong.scheduler.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import site.jobiljeong.scheduler.dto.ScheduleUpdateRequest;
+import site.jobiljeong.scheduler.dto.schedule.ScheduleUpdateRequest;
 import site.jobiljeong.scheduler.entity.custom.ScheduleType;
 
 import java.time.LocalDateTime;

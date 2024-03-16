@@ -1,4 +1,4 @@
-package site.jobiljeong.scheduler.dto;
+package site.jobiljeong.scheduler.dto.schedule;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;

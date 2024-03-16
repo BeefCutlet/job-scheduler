@@ -1,4 +1,4 @@
-package site.jobiljeong.scheduler.dto;
+package site.jobiljeong.scheduler.dto.schedule;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

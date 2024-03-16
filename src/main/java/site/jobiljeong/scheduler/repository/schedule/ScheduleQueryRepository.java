@@ -1,6 +1,6 @@
 package site.jobiljeong.scheduler.repository.schedule;
 
-import site.jobiljeong.scheduler.dto.ScheduleInfoResponse;
+import site.jobiljeong.scheduler.dto.schedule.ScheduleInfoResponse;
 
 import java.time.LocalDate;
 import java.util.List;

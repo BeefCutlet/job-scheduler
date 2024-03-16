@@ -1,4 +1,4 @@
-package site.jobiljeong.scheduler.dto;
+package site.jobiljeong.scheduler.dto.user;
 
 import lombok.Getter;
 import site.jobiljeong.scheduler.entity.Users;

@@ -4,8 +4,8 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import site.jobiljeong.scheduler.dto.UserInfo;
-import site.jobiljeong.scheduler.dto.UserSaveRequest;
+import site.jobiljeong.scheduler.dto.user.UserInfo;
+import site.jobiljeong.scheduler.dto.user.UserSaveRequest;
 import site.jobiljeong.scheduler.entity.custom.UserStatus;
 import site.jobiljeong.scheduler.service.users.UserService;
 
