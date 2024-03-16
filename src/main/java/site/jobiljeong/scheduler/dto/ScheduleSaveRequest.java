@@ -1,5 +1,6 @@
 package site.jobiljeong.scheduler.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import site.jobiljeong.scheduler.entity.Company;
 import site.jobiljeong.scheduler.entity.Schedule;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 public class ScheduleSaveRequest {
 
     private ScheduleType scheduleType;
+    @JsonFormat(pattern = "yyyy-MM-ddTHH:mm")
     private LocalDateTime scheduleDate;
     private String memo;
     private String websiteAddress;
