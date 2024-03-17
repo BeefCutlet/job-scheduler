@@ -24,4 +24,10 @@ public class Company extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Issue> issues = new ArrayList<>();
+
+    public void changeCompanyInfo(String name, String websiteAddress, String memo) {
+        this.name = name;
+        this.websiteAddress = websiteAddress;
+        this.memo = memo;
+    }
 }
