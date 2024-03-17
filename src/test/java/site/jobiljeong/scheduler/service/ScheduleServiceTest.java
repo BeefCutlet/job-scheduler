@@ -1,19 +1,15 @@
 package site.jobiljeong.scheduler.service;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
-import site.jobiljeong.scheduler.dto.schedule.ScheduleInfoRequest;
-import site.jobiljeong.scheduler.dto.schedule.ScheduleInfoResponse;
+import site.jobiljeong.scheduler.dto.schedule.ScheduleReadResponse;
 import site.jobiljeong.scheduler.entity.Company;
 import site.jobiljeong.scheduler.entity.Schedule;
-import site.jobiljeong.scheduler.entity.Users;
 import site.jobiljeong.scheduler.entity.custom.ScheduleType;
 import site.jobiljeong.scheduler.repository.schedule.ScheduleRepository;
 import site.jobiljeong.scheduler.repository.schedule.ScheduleRepositoryImpl;
@@ -46,7 +42,7 @@ public class ScheduleServiceTest {
 
         when(scheduleRepository.findById(scheduleNo)).thenReturn(Optional.of(schedule));
 
-        ScheduleInfoResponse findSchedule = scheduleService.findSchedule(scheduleNo);
+        ScheduleReadResponse findSchedule = scheduleService.findSchedule(scheduleNo);
 
         assertThat(findSchedule.getScheduleType()).isEqualTo(ScheduleType.MEETING);
         assertThat(findSchedule.getScheduleGroup()).isEqualTo("ScheduleGroup");

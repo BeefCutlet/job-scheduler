@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import site.jobiljeong.scheduler.dto.schedule.ScheduleInfoResponse;
+import site.jobiljeong.scheduler.dto.schedule.ScheduleReadResponse;
 import site.jobiljeong.scheduler.entity.Company;
 import site.jobiljeong.scheduler.entity.Schedule;
 import site.jobiljeong.scheduler.entity.Users;
@@ -49,7 +49,7 @@ public class ScheduleTest {
         Schedule schedule = createSchedule();
         Schedule scheduleAnotherDay = createScheduleAnotherDay();
 
-        List<ScheduleInfoResponse> scheduleList = scheduleQueryRepository.findScheduleList(
+        List<ScheduleReadResponse> scheduleList = scheduleQueryRepository.findScheduleList(
                 schedule.getUsers().getId(),
                 LocalDate.of(2024, 3, 11));
 

@@ -3,7 +3,7 @@ package site.jobiljeong.scheduler.service.users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import site.jobiljeong.scheduler.dto.user.UserInfo;
+import site.jobiljeong.scheduler.dto.user.UserReadResponse;
 import site.jobiljeong.scheduler.dto.user.UserSaveRequest;
 import site.jobiljeong.scheduler.entity.Users;
 import site.jobiljeong.scheduler.entity.custom.UserStatus;
@@ -39,9 +39,9 @@ public class UserService {
      * @param userId
      * @return
      */
-    public UserInfo findUserInfo(Long userId) {
+    public UserReadResponse findUserInfo(Long userId) {
         Users user = usersRepository.findById(userId).orElseThrow(
                 () -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
-        return new UserInfo().createUserInfo(user);
+        return new UserReadResponse().createUserInfo(user);
     }
 }

@@ -4,8 +4,8 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import site.jobiljeong.scheduler.dto.schedule.ScheduleInfoResponse;
-import site.jobiljeong.scheduler.dto.schedule.ScheduleInfoRequest;
+import site.jobiljeong.scheduler.dto.schedule.ScheduleReadResponse;
+import site.jobiljeong.scheduler.dto.schedule.ScheduleReadRequest;
 import site.jobiljeong.scheduler.dto.schedule.ScheduleSaveRequest;
 import site.jobiljeong.scheduler.dto.schedule.ScheduleUpdateRequest;
 import site.jobiljeong.scheduler.service.schedule.ScheduleService;
@@ -25,7 +25,7 @@ public class ScheduleController {
      */
     @PostMapping
     public ResponseEntity<?> saveSchedule(HttpSession session,
-                                          ScheduleSaveRequest scheduleSaveRequest) {
+                                          @RequestBody ScheduleSaveRequest scheduleSaveRequest) {
         Long userId = (Long) session.getAttribute("userId");
         scheduleService.saveSchedule(userId, scheduleSaveRequest);
         return ResponseEntity.created(URI.create("/info")).build();
@@ -36,7 +36,7 @@ public class ScheduleController {
      */
     @PutMapping("/{scheduleNo}")
     public ResponseEntity<?> modifySchedule(@PathVariable Long scheduleNo,
-                                            ScheduleUpdateRequest scheduleUpdateRequest) {
+                                            @RequestBody ScheduleUpdateRequest scheduleUpdateRequest) {
         scheduleService.modifySchedule(scheduleNo, scheduleUpdateRequest);
         return ResponseEntity.noContent().build();
     }
@@ -45,9 +45,9 @@ public class ScheduleController {
      * 일정 정보 단건 조회
      */
     @GetMapping("/{scheduleNo}")
-    public ResponseEntity<ScheduleInfoResponse> findSchedule(@PathVariable Long scheduleNo) {
-        ScheduleInfoResponse scheduleInfoResponse = scheduleService.findSchedule(scheduleNo);
-        return ResponseEntity.ok(scheduleInfoResponse);
+    public ResponseEntity<ScheduleReadResponse> findSchedule(@PathVariable Long scheduleNo) {
+        ScheduleReadResponse scheduleReadResponse = scheduleService.findSchedule(scheduleNo);
+        return ResponseEntity.ok(scheduleReadResponse);
     }
 
     /**
@@ -56,10 +56,10 @@ public class ScheduleController {
      * 기간 포맷 : yyyy-MM-dd
      */
     @GetMapping("/list")
-    public ResponseEntity<List<ScheduleInfoResponse>> findScheduleList(HttpSession session,
-                                                                       ScheduleInfoRequest scheduleInfoRequest) {
+    public ResponseEntity<List<ScheduleReadResponse>> findScheduleList(HttpSession session,
+                                                                       @RequestBody ScheduleReadRequest scheduleReadRequest) {
         Long userId = (Long) session.getAttribute("userId");
-        List<ScheduleInfoResponse> scheduleList = scheduleService.findScheduleList(userId, scheduleInfoRequest);
+        List<ScheduleReadResponse> scheduleList = scheduleService.findScheduleList(userId, scheduleReadRequest);
         return ResponseEntity.ok(scheduleList);
     }
 }

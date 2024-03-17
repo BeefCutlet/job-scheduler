@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ScheduleInfoResponse {
+public class ScheduleReadResponse {
 
     private ScheduleType scheduleType;
     private LocalDateTime scheduleDate;
@@ -20,7 +20,7 @@ public class ScheduleInfoResponse {
     private String scheduleGroup;
     private String companyName;
 
-    public ScheduleInfoResponse createScheduleInfo(Schedule schedule) {
+    public ScheduleReadResponse createScheduleInfo(Schedule schedule) {
         this.scheduleType = schedule.getScheduleType();
         this.scheduleDate = schedule.getScheduleDate();
         this.memo = schedule.getMemo();

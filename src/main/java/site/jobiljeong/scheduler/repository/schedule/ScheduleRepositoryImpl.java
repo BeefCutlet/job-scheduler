@@ -6,7 +6,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-import site.jobiljeong.scheduler.dto.schedule.ScheduleInfoResponse;
+import site.jobiljeong.scheduler.dto.schedule.ScheduleReadResponse;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -31,8 +31,8 @@ public class ScheduleRepositoryImpl implements ScheduleQueryRepository {
      * 일정 목록 기간별 조회 (월별 조회)
      * startDate ~ endDate 사이의 유저의 일정
      */
-    public List<ScheduleInfoResponse> findScheduleList(Long userId, LocalDate currentTime) {
-        return queryFactory.select(Projections.constructor(ScheduleInfoResponse.class,
+    public List<ScheduleReadResponse> findScheduleList(Long userId, LocalDate currentTime) {
+        return queryFactory.select(Projections.constructor(ScheduleReadResponse.class,
                         schedule.scheduleType,
                         schedule.scheduleDate,
                         schedule.memo,

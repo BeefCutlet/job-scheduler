@@ -3,8 +3,8 @@ package site.jobiljeong.scheduler.service.schedule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import site.jobiljeong.scheduler.dto.schedule.ScheduleInfoRequest;
-import site.jobiljeong.scheduler.dto.schedule.ScheduleInfoResponse;
+import site.jobiljeong.scheduler.dto.schedule.ScheduleReadRequest;
+import site.jobiljeong.scheduler.dto.schedule.ScheduleReadResponse;
 import site.jobiljeong.scheduler.dto.schedule.ScheduleSaveRequest;
 import site.jobiljeong.scheduler.dto.schedule.ScheduleUpdateRequest;
 import site.jobiljeong.scheduler.entity.Company;
@@ -54,17 +54,17 @@ public class ScheduleService {
     /**
      * 일정 정보 단건 조회
      */
-    public ScheduleInfoResponse findSchedule(Long scheduleNo) {
+    public ScheduleReadResponse findSchedule(Long scheduleNo) {
         Schedule schedule = scheduleRepository.findById(scheduleNo).orElseThrow(
                 () -> new IllegalArgumentException("일정 정보를 찾을 수 없습니다."));
 
-        return new ScheduleInfoResponse().createScheduleInfo(schedule);
+        return new ScheduleReadResponse().createScheduleInfo(schedule);
     }
 
     /**
      * 일정 정보 목록 조회 (기간별 - 월별)
      */
-    public List<ScheduleInfoResponse> findScheduleList(Long userId, ScheduleInfoRequest scheduleInfoRequest) {
-        return scheduleQueryRepository.findScheduleList(userId, scheduleInfoRequest.getRequestDate());
+    public List<ScheduleReadResponse> findScheduleList(Long userId, ScheduleReadRequest scheduleReadRequest) {
+        return scheduleQueryRepository.findScheduleList(userId, scheduleReadRequest.getRequestDate());
     }
 }

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import site.jobiljeong.scheduler.dto.user.UserInfo;
+import site.jobiljeong.scheduler.dto.user.UserReadResponse;
 import site.jobiljeong.scheduler.dto.user.UserSaveRequest;
 import site.jobiljeong.scheduler.entity.Users;
 import site.jobiljeong.scheduler.entity.custom.UserStatus;
@@ -97,12 +97,12 @@ public class UserServiceTest {
         //when
         when(usersRepository.findById(requestId)).thenReturn(Optional.ofNullable(user));
 
-        UserInfo userInfo = userService.findUserInfo(requestId);
+        UserReadResponse userReadResponse = userService.findUserInfo(requestId);
 
         //then
-        assertThat(userInfo.getUid()).isEqualTo("UserUid");
-        assertThat(userInfo.getNickname()).isEqualTo("UserNickname");
-        assertThat(userInfo.getAuthority()).isEqualTo("ROLE_USER");
+        assertThat(userReadResponse.getUid()).isEqualTo("UserUid");
+        assertThat(userReadResponse.getNickname()).isEqualTo("UserNickname");
+        assertThat(userReadResponse.getAuthority()).isEqualTo("ROLE_USER");
     }
 
     @Test
