@@ -42,6 +42,6 @@ public class UserService {
     public UserReadResponse findUserInfo(Long userId) {
         Users user = usersRepository.findById(userId).orElseThrow(
                 () -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
-        return new UserReadResponse().createUserInfo(user);
+        return new UserReadResponse().createUser(user);
     }
 }

@@ -58,7 +58,7 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findById(scheduleNo).orElseThrow(
                 () -> new IllegalArgumentException("일정 정보를 찾을 수 없습니다."));
 
-        return new ScheduleReadResponse().createScheduleInfo(schedule);
+        return new ScheduleReadResponse().createSchedule(schedule);
     }
 
     /**

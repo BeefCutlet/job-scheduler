@@ -10,7 +10,7 @@ public class UserReadResponse {
     private String nickname;
     private String authority;
 
-    public UserReadResponse createUserInfo(Users user) {
+    public UserReadResponse createUser(Users user) {
         this.uid = user.getUid();
         this.nickname = user.getNickname();
         this.authority = user.getAuthority();

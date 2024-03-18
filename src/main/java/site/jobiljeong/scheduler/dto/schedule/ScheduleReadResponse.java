@@ -20,7 +20,7 @@ public class ScheduleReadResponse {
     private String scheduleGroup;
     private String companyName;
 
-    public ScheduleReadResponse createScheduleInfo(Schedule schedule) {
+    public ScheduleReadResponse createSchedule(Schedule schedule) {
         this.scheduleType = schedule.getScheduleType();
         this.scheduleDate = schedule.getScheduleDate();
         this.memo = schedule.getMemo();
