@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 @Builder
 public class CompanyReadResponse {
 
+    private Long companyNo;
     private String name;
     private String websiteAddress;
     private String memo;
@@ -19,6 +20,7 @@ public class CompanyReadResponse {
 
     public static CompanyReadResponse of(Company company) {
         return CompanyReadResponse.builder()
+                .companyNo(company.getId())
                 .name(company.getName())
                 .websiteAddress(company.getWebsiteAddress())
                 .memo(company.getMemo())

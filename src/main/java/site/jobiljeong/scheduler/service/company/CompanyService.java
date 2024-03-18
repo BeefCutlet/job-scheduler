@@ -20,8 +20,8 @@ public class CompanyService {
     /**
      * 회사 정보 수정
      */
-    public void modifyCompanyInfo(Long companyNo, CompanyUpdateRequest companyUpdateRequest) {
-        Company company = companyRepository.findById(companyNo).orElseThrow(
+    public void modifyCompanyInfo(CompanyUpdateRequest companyUpdateRequest) {
+        Company company = companyRepository.findById(companyUpdateRequest.getCompanyNo()).orElseThrow(
                 () -> new IllegalArgumentException("회사 정보를 찾을 수 없습니다."));
 
         company.changeCompanyInfo(

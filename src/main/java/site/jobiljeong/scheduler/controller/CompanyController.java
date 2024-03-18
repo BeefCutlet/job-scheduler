@@ -20,10 +20,9 @@ public class CompanyController {
     /**
      * 회사 정보 수정
      */
-    @PutMapping("/{companyNo}")
-    public ResponseEntity<?> modifyCompanyInfo(@PathVariable Long companyNo,
-                                               @RequestBody CompanyUpdateRequest companyUpdateRequest) {
-        companyService.modifyCompanyInfo(companyNo, companyUpdateRequest);
+    @PutMapping
+    public ResponseEntity<?> modifyCompanyInfo(@RequestBody CompanyUpdateRequest companyUpdateRequest) {
+        companyService.modifyCompanyInfo(companyUpdateRequest);
         return ResponseEntity.noContent().build();
     }
 

@@ -22,6 +22,7 @@ public class CompanyRepositoryImpl implements CompanyQueryRepository {
     @Override
     public List<CompanyReadResponse> findCompanyList(Long userId) {
         return queryFactory.select(Projections.constructor(CompanyReadResponse.class,
+                        company.id.as("companyNo"),
                         company.name,
                         company.websiteAddress,
                         company.memo))
