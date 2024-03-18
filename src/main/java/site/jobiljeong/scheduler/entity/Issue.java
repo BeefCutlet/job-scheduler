@@ -21,4 +21,9 @@ public class Issue extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
+
+    public void changeIssueInfo(String originLink, String memo) {
+        this.originLink = originLink;
+        this.memo = memo;
+    }
 }
