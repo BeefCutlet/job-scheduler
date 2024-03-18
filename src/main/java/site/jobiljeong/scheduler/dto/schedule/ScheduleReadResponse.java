@@ -1,6 +1,7 @@
 package site.jobiljeong.scheduler.dto.schedule;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import site.jobiljeong.scheduler.entity.Schedule;
@@ -9,8 +10,8 @@ import site.jobiljeong.scheduler.entity.custom.ScheduleType;
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ScheduleReadResponse {
 
     private ScheduleType scheduleType;
@@ -20,13 +21,14 @@ public class ScheduleReadResponse {
     private String scheduleGroup;
     private String companyName;
 
-    public ScheduleReadResponse createSchedule(Schedule schedule) {
-        this.scheduleType = schedule.getScheduleType();
-        this.scheduleDate = schedule.getScheduleDate();
-        this.memo = schedule.getMemo();
-        this.websiteAddress = schedule.getWebsiteAddress();
-        this.scheduleGroup = schedule.getScheduleGroup();
-        this.companyName = schedule.getCompany().getName();
-        return this;
+    public static ScheduleReadResponse of(Schedule schedule) {
+        return ScheduleReadResponse.builder()
+                .scheduleType(schedule.getScheduleType())
+                .scheduleDate(schedule.getScheduleDate())
+                .memo(schedule.getMemo())
+                .websiteAddress(schedule.getWebsiteAddress())
+                .scheduleGroup(schedule.getScheduleGroup())
+                .companyName(schedule.getCompany().getName())
+                .build();
     }
 }
