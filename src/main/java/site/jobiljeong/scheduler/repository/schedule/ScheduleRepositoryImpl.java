@@ -33,6 +33,7 @@ public class ScheduleRepositoryImpl implements ScheduleQueryRepository {
      */
     public List<ScheduleReadResponse> findScheduleList(Long userId, LocalDate currentTime) {
         return queryFactory.select(Projections.constructor(ScheduleReadResponse.class,
+                        schedule.id.as("scheduleNo"),
                         schedule.scheduleType,
                         schedule.scheduleDate,
                         schedule.memo,

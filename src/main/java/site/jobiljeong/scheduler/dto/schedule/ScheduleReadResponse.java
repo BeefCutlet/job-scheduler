@@ -3,7 +3,6 @@ package site.jobiljeong.scheduler.dto.schedule;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import site.jobiljeong.scheduler.entity.Schedule;
 import site.jobiljeong.scheduler.entity.custom.ScheduleType;
 
@@ -14,6 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 public class ScheduleReadResponse {
 
+    private Long scheduleNo;
     private ScheduleType scheduleType;
     private LocalDateTime scheduleDate;
     private String memo;
@@ -23,6 +23,7 @@ public class ScheduleReadResponse {
 
     public static ScheduleReadResponse of(Schedule schedule) {
         return ScheduleReadResponse.builder()
+                .scheduleNo(schedule.getId())
                 .scheduleType(schedule.getScheduleType())
                 .scheduleDate(schedule.getScheduleDate())
                 .memo(schedule.getMemo())

@@ -34,10 +34,9 @@ public class ScheduleController {
     /**
      * 일정 정보 수정
      */
-    @PutMapping("/{scheduleNo}")
-    public ResponseEntity<?> modifySchedule(@PathVariable Long scheduleNo,
-                                            @RequestBody ScheduleUpdateRequest scheduleUpdateRequest) {
-        scheduleService.modifySchedule(scheduleNo, scheduleUpdateRequest);
+    @PutMapping
+    public ResponseEntity<?> modifySchedule(@RequestBody ScheduleUpdateRequest scheduleUpdateRequest) {
+        scheduleService.modifySchedule(scheduleUpdateRequest);
         return ResponseEntity.noContent().build();
     }
 

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Getter
 public class ScheduleUpdateRequest {
 
+    private Long scheduleNo;
     private ScheduleType scheduleType;
     private LocalDateTime scheduleDate;
     private String memo;

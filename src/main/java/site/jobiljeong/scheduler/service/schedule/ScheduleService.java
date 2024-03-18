@@ -44,8 +44,8 @@ public class ScheduleService {
     /**
      * 일정 정보 수정
      */
-    public void modifySchedule(Long scheduleNo, ScheduleUpdateRequest scheduleUpdateRequest) {
-        Schedule schedule = scheduleRepository.findById(scheduleNo).orElseThrow(
+    public void modifySchedule(ScheduleUpdateRequest scheduleUpdateRequest) {
+        Schedule schedule = scheduleRepository.findById(scheduleUpdateRequest.getScheduleNo()).orElseThrow(
                 () -> new IllegalArgumentException("일정 정보를 찾을 수 없습니다."));
 
         schedule.changeScheduleInfo(scheduleUpdateRequest);
