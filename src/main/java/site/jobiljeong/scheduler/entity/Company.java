@@ -22,6 +22,10 @@ public class Company extends BaseTimeEntity {
     private String websiteAddress;
     private String memo;
 
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    private Users users;
+
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Issue> issues = new ArrayList<>();
 
