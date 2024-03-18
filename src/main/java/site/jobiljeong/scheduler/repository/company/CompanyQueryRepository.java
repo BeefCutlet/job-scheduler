@@ -2,6 +2,8 @@ package site.jobiljeong.scheduler.repository.company;
 
 import site.jobiljeong.scheduler.dto.company.CompanyReadResponse;
 
+import java.util.List;
+
 public interface CompanyQueryRepository {
-    CompanyReadResponse findCompanyInfo(Long companyNo);
+    List<CompanyReadResponse> findCompanyList(Long userId);
 }

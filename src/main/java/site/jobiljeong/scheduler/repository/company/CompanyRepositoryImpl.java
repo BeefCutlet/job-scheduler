@@ -6,6 +6,8 @@ import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 import site.jobiljeong.scheduler.dto.company.CompanyReadResponse;
 
+import java.util.List;
+
 import static site.jobiljeong.scheduler.entity.QCompany.company;
 
 @Repository
@@ -18,12 +20,13 @@ public class CompanyRepositoryImpl implements CompanyQueryRepository {
     }
 
     @Override
-    public CompanyReadResponse findCompanyInfo(Long companyNo) {
+    public List<CompanyReadResponse> findCompanyList(Long userId) {
         return queryFactory.select(Projections.constructor(CompanyReadResponse.class,
                         company.name,
                         company.websiteAddress,
                         company.memo))
                 .from(company)
-                .fetchOne();
+                .where(company.users.id.eq(userId))
+                .fetch();
     }
 }
