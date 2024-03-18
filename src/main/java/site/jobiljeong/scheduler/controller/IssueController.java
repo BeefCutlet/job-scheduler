@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import site.jobiljeong.scheduler.dto.issue.IssueReadResponse;
 import site.jobiljeong.scheduler.dto.issue.IssueSaveRequest;
+import site.jobiljeong.scheduler.dto.issue.IssueUpdateRequest;
 import site.jobiljeong.scheduler.service.issue.IssueService;
 
 import java.util.List;
@@ -17,12 +18,30 @@ public class IssueController {
     private final IssueService issueService;
 
     /**
-     * 회사 관련 이슈 저장
+     * 회사 관련 이슈 정보 저장
      */
     @PostMapping
     public ResponseEntity<?> saveNewIssueAboutCompany(@RequestBody IssueSaveRequest issueSaveRequest) {
         issueService.saveIssue(issueSaveRequest);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * 회사 관련 이슈 정보 수정
+     */
+    @PutMapping
+    public ResponseEntity<?> modifyIssue(@RequestBody IssueUpdateRequest issueUpdateRequest) {
+        issueService.modifyIssue(issueUpdateRequest);
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * 회사 관련 이슈 단건 삭제
+     */
+    @DeleteMapping("/{issueNo}")
+    public ResponseEntity<?> deleteIssue(@PathVariable Long issueNo) {
+        issueService.deleteIssue(issueNo);
+        return ResponseEntity.noContent().build();
     }
 
     /**
