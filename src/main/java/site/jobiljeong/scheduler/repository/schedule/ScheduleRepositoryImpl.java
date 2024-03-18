@@ -40,8 +40,7 @@ public class ScheduleRepositoryImpl implements ScheduleQueryRepository {
                         schedule.scheduleGroup,
                         company.name.as("companyName")))
                 .from(schedule)
-                .join(company)
-                .on(schedule.company.id.eq(company.id))
+                .join(schedule.company, company)
                 .where(users.id.eq(userId), compareMonth(currentTime))
                 .fetch();
     }
