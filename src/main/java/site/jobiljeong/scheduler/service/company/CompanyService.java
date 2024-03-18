@@ -36,7 +36,7 @@ public class CompanyService {
     public CompanyReadResponse findCompanyInfo(Long companyNo) {
         Company company = companyRepository.findById(companyNo).orElseThrow(
                 () -> new IllegalArgumentException("회사 정보를 찾을 수 없습니다."));
-        return new CompanyReadResponse(company);
+        return CompanyReadResponse.of(company);
     }
 
     /**
