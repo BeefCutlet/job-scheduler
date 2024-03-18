@@ -7,6 +7,7 @@ import site.jobiljeong.scheduler.entity.Issue;
 @Getter
 public class IssueSaveRequest {
 
+    private Long companyNo;
     private String originLink;
     private String memo;
 
