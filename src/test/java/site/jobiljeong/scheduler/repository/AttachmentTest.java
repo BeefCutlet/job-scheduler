@@ -6,6 +6,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import site.jobiljeong.scheduler.entity.Attachment;
 import site.jobiljeong.scheduler.entity.Company;
 import site.jobiljeong.scheduler.entity.Schedule;
+import site.jobiljeong.scheduler.entity.custom.AttachmentCategory;
 import site.jobiljeong.scheduler.entity.custom.ScheduleType;
 import site.jobiljeong.scheduler.repository.attachment.AttachmentRepository;
 
@@ -24,16 +25,16 @@ public class AttachmentTest {
         Attachment savedAttachment = attachmentRepository.save(attachment);
 
         assertThat(savedAttachment.getName()).isEqualTo("AttachmentName");
-        assertThat(savedAttachment.getCategory()).isEqualTo("AttachmentCategory");
-        assertThat(savedAttachment.getAddress()).isEqualTo("AttachmentAddress");
+        assertThat(savedAttachment.getCategory()).isEqualTo(AttachmentCategory.RESUME);
+        assertThat(savedAttachment.getUrl()).isEqualTo("AttachmentUrl");
     }
 
     private Attachment createAttachment() {
         Schedule schedule = createSchedule();
         return Attachment.builder()
                 .name("AttachmentName")
-                .category("AttachmentCategory")
-                .address("AttachmentAddress")
+                .category(AttachmentCategory.RESUME)
+                .url("AttachmentUrl")
                 .schedule(schedule)
                 .build();
     }
