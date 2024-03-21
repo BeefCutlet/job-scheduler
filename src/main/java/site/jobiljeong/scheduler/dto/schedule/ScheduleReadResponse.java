@@ -3,10 +3,12 @@ package site.jobiljeong.scheduler.dto.schedule;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import site.jobiljeong.scheduler.dto.attachment.AttachmentResponse;
 import site.jobiljeong.scheduler.entity.Schedule;
 import site.jobiljeong.scheduler.entity.custom.ScheduleType;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -20,8 +22,9 @@ public class ScheduleReadResponse {
     private String websiteAddress;
     private String scheduleGroup;
     private String companyName;
+    private List<AttachmentResponse> attachmentList;
 
-    public static ScheduleReadResponse of(Schedule schedule) {
+    public static ScheduleReadResponse of(Schedule schedule, List<AttachmentResponse> attachmentList) {
         return ScheduleReadResponse.builder()
                 .scheduleNo(schedule.getId())
                 .scheduleType(schedule.getScheduleType())
@@ -30,6 +33,7 @@ public class ScheduleReadResponse {
                 .websiteAddress(schedule.getWebsiteAddress())
                 .scheduleGroup(schedule.getScheduleGroup())
                 .companyName(schedule.getCompany().getName())
+                .attachmentList(attachmentList)
                 .build();
     }
 }

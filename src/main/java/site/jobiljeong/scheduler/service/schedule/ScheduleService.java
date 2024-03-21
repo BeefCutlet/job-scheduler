@@ -3,13 +3,16 @@ package site.jobiljeong.scheduler.service.schedule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.jobiljeong.scheduler.dto.attachment.AttachmentResponse;
 import site.jobiljeong.scheduler.dto.schedule.ScheduleReadRequest;
 import site.jobiljeong.scheduler.dto.schedule.ScheduleReadResponse;
 import site.jobiljeong.scheduler.dto.schedule.ScheduleSaveRequest;
 import site.jobiljeong.scheduler.dto.schedule.ScheduleUpdateRequest;
+import site.jobiljeong.scheduler.entity.Attachment;
 import site.jobiljeong.scheduler.entity.Company;
 import site.jobiljeong.scheduler.entity.Schedule;
 import site.jobiljeong.scheduler.entity.Users;
+import site.jobiljeong.scheduler.repository.attachment.AttachmentRepository;
 import site.jobiljeong.scheduler.repository.company.CompanyRepository;
 import site.jobiljeong.scheduler.repository.schedule.ScheduleQueryRepository;
 import site.jobiljeong.scheduler.repository.schedule.ScheduleRepository;
@@ -24,6 +27,7 @@ public class ScheduleService {
 
     private final UsersRepository usersRepository;
     private final CompanyRepository companyRepository;
+    private final AttachmentRepository attachmentRepository;
     private final ScheduleRepository scheduleRepository;
     private final ScheduleQueryRepository scheduleQueryRepository;
 
@@ -55,10 +59,15 @@ public class ScheduleService {
      * 일정 정보 단건 조회
      */
     public ScheduleReadResponse findSchedule(Long scheduleNo) {
+        //일정 정보 조회
         Schedule schedule = scheduleRepository.findById(scheduleNo).orElseThrow(
                 () -> new IllegalArgumentException("일정 정보를 찾을 수 없습니다."));
-
-        return ScheduleReadResponse.of(schedule);
+        //첨부 파일 목록 조회
+        List<Attachment> attachmentList = attachmentRepository.findAllByScheduleId(scheduleNo);
+        List<AttachmentResponse> attachmentResponseList = attachmentList.stream()
+                .map(AttachmentResponse::of)
+                .toList();
+        return ScheduleReadResponse.of(schedule, attachmentResponseList);
     }
 
     /**
