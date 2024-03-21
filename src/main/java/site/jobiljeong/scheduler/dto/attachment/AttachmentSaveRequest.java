@@ -17,7 +17,8 @@ public class AttachmentSaveRequest {
 
     public Attachment createAttachment(Schedule schedule) {
         return Attachment.builder()
-                .name(name)
+                .originName(name)
+                .savedName(Attachment.createSavedName(name))
                 .category(category)
                 .url(url)
                 .schedule(schedule)

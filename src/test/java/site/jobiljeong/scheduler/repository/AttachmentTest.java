@@ -24,7 +24,7 @@ public class AttachmentTest {
 
         Attachment savedAttachment = attachmentRepository.save(attachment);
 
-        assertThat(savedAttachment.getName()).isEqualTo("AttachmentName");
+        assertThat(savedAttachment.getOriginName()).isEqualTo("AttachmentName");
         assertThat(savedAttachment.getCategory()).isEqualTo(AttachmentCategory.RESUME);
         assertThat(savedAttachment.getUrl()).isEqualTo("AttachmentUrl");
     }
@@ -32,7 +32,7 @@ public class AttachmentTest {
     private Attachment createAttachment() {
         Schedule schedule = createSchedule();
         return Attachment.builder()
-                .name("AttachmentName")
+                .originName("AttachmentName")
                 .category(AttachmentCategory.RESUME)
                 .url("AttachmentUrl")
                 .schedule(schedule)

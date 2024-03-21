@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import site.jobiljeong.scheduler.entity.custom.AttachmentCategory;
 
+import java.util.UUID;
+
 
 @Entity
 @Builder
@@ -17,7 +19,8 @@ public class Attachment extends BaseTimeEntity {
     @Column(name = "attachment_id")
     private Long id;
 
-    private String name;
+    private String originName;
+    private String savedName;
 
     @Enumerated(EnumType.STRING)
     private AttachmentCategory category;
@@ -27,4 +30,8 @@ public class Attachment extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "schedule_id")
     private Schedule schedule;
+
+    public static String createSavedName(String originName) {
+        return UUID.randomUUID() + originName;
+    }
 }
