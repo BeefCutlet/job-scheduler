@@ -2,19 +2,19 @@ package site.jobiljeong.scheduler.service.attachment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import site.jobiljeong.scheduler.dto.FileInfo;
 import site.jobiljeong.scheduler.dto.attachment.AttachmentSaveRequest;
 import site.jobiljeong.scheduler.entity.Attachment;
 import site.jobiljeong.scheduler.entity.Schedule;
-import site.jobiljeong.scheduler.exception.FileNotExistException;
 import site.jobiljeong.scheduler.repository.attachment.AttachmentRepository;
 import site.jobiljeong.scheduler.repository.schedule.ScheduleRepository;
 import site.jobiljeong.scheduler.util.FileService;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AttachmentService {
 
     private final ScheduleRepository scheduleRepository;
@@ -24,22 +24,12 @@ public class AttachmentService {
     /**
      * 첨부파일 정보를 DB에 저장
      */
-    public void saveAttachment(Long scheduleNo, List<AttachmentSaveRequest> attachmentList) {
-        Schedule schedule = scheduleRepository.findById(scheduleNo).orElseThrow(
+    public void saveAttachment(AttachmentSaveRequest attachmentRequest, MultipartFile file) {
+        Schedule schedule = scheduleRepository.findById(attachmentRequest.getScheduleNo()).orElseThrow(
                 () -> new IllegalArgumentException("일정 정보를 찾을 수 없습니다."));
-        attachmentList.forEach(attachmentRequest -> {
-            attachmentRepository.save(attachmentRequest.createAttachment(schedule));
-        });
-    }
-
-    /**
-     * 첨부파일을 파일 스토리지에 저장
-     */
-    public String storeAttachmentFile(MultipartFile file) {
-        if (file.isEmpty()) {
-            throw new FileNotExistException("입력된 파일이 존재하지 않습니다.");
-        }
-        return fileService.storeFile(file);
+        FileInfo fileInfo = fileService.storeFile(file);
+        Attachment attachment = attachmentRequest.createAttachment(schedule, fileInfo);
+        attachmentRepository.save(attachment);
     }
 
     /**
@@ -48,7 +38,7 @@ public class AttachmentService {
     public void deleteAttachment(Long attachmentNo) {
         Attachment attachment = attachmentRepository.findById(attachmentNo).orElseThrow(() ->
             new IllegalArgumentException("첨부 파일 정보가 존재하지 않습니다."));
-        fileService.deleteFile(attachment.getUrl());
         attachmentRepository.deleteById(attachmentNo);
+        fileService.deleteFile(attachment.getUrl());
     }
 }
