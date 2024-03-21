@@ -5,7 +5,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.util.ReflectionTestUtils;
+import site.jobiljeong.scheduler.dto.FileInfo;
 import site.jobiljeong.scheduler.dto.attachment.AttachmentSaveRequest;
 import site.jobiljeong.scheduler.entity.Attachment;
 import site.jobiljeong.scheduler.entity.Company;
@@ -18,9 +20,8 @@ import site.jobiljeong.scheduler.service.attachment.AttachmentService;
 import site.jobiljeong.scheduler.util.FileService;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
@@ -42,33 +43,31 @@ public class AttachmentServiceTest {
         //given
         Long scheduleNo = 1L;
         Schedule schedule = createSchedule();
+        FileInfo fileInfo = createFileInfo("OriginalFilename");
+        final MockMultipartFile file = mock(MockMultipartFile.class);
 
         //mocking
         ReflectionTestUtils.setField(schedule, "id", scheduleNo);
         when(scheduleRepository.findById(scheduleNo)).thenReturn(Optional.of(schedule));
+        when(fileService.storeFile(file)).thenReturn(fileInfo);
 
         //when
-        attachmentService.saveAttachment(scheduleNo, createAttachmentRequestList());
+        attachmentService.saveAttachment(createAttachmentRequest(), file);
 
         //then
         verify(attachmentRepository).save(any());
     }
 
-    @Test
-    void storeAttachmentFileSuccess() {
-
+    private AttachmentSaveRequest createAttachmentRequest() {
+        return new AttachmentSaveRequest(1L, AttachmentCategory.RESUME);
     }
 
-    private List<AttachmentSaveRequest> createAttachmentRequestList() {
-        AttachmentSaveRequest attachmentRequest1 = new AttachmentSaveRequest(
-                1L,
-                "AttachmentName",
-                AttachmentCategory.RESUME,
-                "AttachmentUrl");
-        List<AttachmentSaveRequest> attachmentRequestList = new ArrayList<>();
-        attachmentRequestList.add(attachmentRequest1);
-
-        return attachmentRequestList;
+    private FileInfo createFileInfo(String filename) {
+        return FileInfo.builder()
+                .originFilename(filename)
+                .savedFilename(UUID.randomUUID() + filename)
+                .filePath("FilePath")
+                .build();
     }
 
     private Schedule createSchedule() {
@@ -93,7 +92,7 @@ public class AttachmentServiceTest {
 
     private Attachment createAttachment() {
         return Attachment.builder()
-                .name("AttachmentName")
+                .originName("AttachmentName")
                 .category(AttachmentCategory.RESUME)
                 .url("AttachmentUrl")
                 .build();
