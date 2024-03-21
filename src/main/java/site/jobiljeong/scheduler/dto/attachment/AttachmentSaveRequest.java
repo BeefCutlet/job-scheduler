@@ -2,6 +2,7 @@ package site.jobiljeong.scheduler.dto.attachment;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import site.jobiljeong.scheduler.dto.FileInfo;
 import site.jobiljeong.scheduler.entity.Attachment;
 import site.jobiljeong.scheduler.entity.Schedule;
 import site.jobiljeong.scheduler.entity.custom.AttachmentCategory;
@@ -11,16 +12,14 @@ import site.jobiljeong.scheduler.entity.custom.AttachmentCategory;
 public class AttachmentSaveRequest {
 
     private Long scheduleNo;
-    private String name;
     private AttachmentCategory category;
-    private String url;
 
-    public Attachment createAttachment(Schedule schedule) {
+    public Attachment createAttachment(Schedule schedule, FileInfo fileInfo) {
         return Attachment.builder()
-                .originName(name)
-                .savedName(Attachment.createSavedName(name))
+                .originName(fileInfo.getOriginFilename())
+                .savedName(fileInfo.getSavedFilename())
                 .category(category)
-                .url(url)
+                .url(fileInfo.getFilePath())
                 .schedule(schedule)
                 .build();
     }
